@@ -1,3 +1,8 @@
+#This program was written by @Monduli
+#Stealing it doesn't benefit anyone as it was not difficult to make
+#Just make it yourself if you're going to bother stealing it
+#At least then you can learn a tiny bit about tkinter
+
 import tkinter as tk
 from tkinter.ttk import *
 import random
