@@ -50,26 +50,40 @@ class Application(tk.Frame):
 				self.to_set['text'] = "You rolled no dice."
 				self.rolled['text'] = ""
 			else:
+				#determine which die was rolled
 				y = die
+				#initialize result variable
 				result = 0
+				#make rolled's text empty
 				self.rolled['text'] = ""
+				#roll the number
 				num = random.randint(1, y)
+				#add the die to the total
 				result += num
+				#for history, note which roll this is since
+				#program started
 				self.first_roll += 1
+				#when there is only 1 die rolled, format as such
 				if x == 1:
 					self.rolled['text'] += str(num)
+				#when multiple dice rolled, expect them with the string
 				else:
 					self.rolled['text'] += str(num) + "+"
+				#for all dice after the first one, format differently
 				for dice in range(2, x+1):
+					#if it is the last die rolled in the set
 					if x == dice:
 						num = random.randint(1, y)
 						result += num
-						self.rolled['text'] += str(num)						
+						self.rolled['text'] += str(num)
+					#if it is not the final die						
 					else:
 						num = random.randint(1, y)
 						result += num
 						self.rolled['text'] += "" + str(num) + "+"
+				#format the text properly
 				self.result_text = "Result: " + str(result) + "."
+				#set the text
 				self.to_set['text'] = self.result_text
 				#history section
 				self.hist3 = self.hist2
@@ -83,8 +97,11 @@ class Application(tk.Frame):
 				elif self.first_roll > 3:
 					self.history['text'] = "History: " + str(self.hist1) + ", " + str(self.hist2) + ", " + str(self.hist3)
 		except ValueError:
+			# if you didn't specify the number of dice it throws an error
 			self.to_set['text'] = "Please enter a number."
 
+	#each of these functions specifies the kind of die that the tk
+	#button will send to the result function
 	def result_d4(self):
 		self.result(4)
 	def result_d6(self):
@@ -98,14 +115,15 @@ class Application(tk.Frame):
 	def result_d20(self):
 		self.result(20)
 
-
-#create window
-#with two input spaces
-#with text "Please enter 2 numbers. A number in this range will be produced."
+#activate tk
 window = tk.Tk()
+#name the window
 window.title("Dice")
+#this is experimental and doesn't quite work yet
 canvas = tk.Canvas(window, width=600, height=800)
+#initialize the class
 app = Application(window)
+#let's go
 app.mainloop()
 
 #display result
